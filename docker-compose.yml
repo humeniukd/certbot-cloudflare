@@ -1,0 +1,16 @@
+volumes:
+  certificates:
+    external: true
+    name: certificates
+  letsencrypt:
+    driver: local
+  certbot:
+    driver: local
+services:
+  certbot:
+    image: loudyo/certbot-cf
+    volumes:
+      - ./cloudflare.ini:/etc/cloudflare.ini:ro
+      - certificates:/export
+      - letsencrypt:/etc/letsencrypt
+      - certbot:/var/lib/letsencrypt
